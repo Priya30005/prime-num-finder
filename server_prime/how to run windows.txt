@@ -1,0 +1,37 @@
+python -m venv env
+.\env\Scripts\activate
+pip install fastapi uvicorn python-multipart sqlalchemy async-exit-stack async-generator
+
+mkdir myapp
+cd myapp
+mkdir app
+cd app
+echo. > __init__.py
+echo. > main.py
+echo. > models.py
+echo. > database.py
+mkdir routers
+cd routers
+echo. > __init__.py
+echo. > primes.py
+cd ../..
+echo. > main.py
+
+For sqlite3 https://www.configserverfirewall.com/windows-10/install-sqlite3-on-windows-10/
+Download SQLite3: Go to the SQLite download page here. Find “Precompiled Binaries for Windows” and download the sqlite-tools-win32-x86-... zip file.
+Extract the ZIP File: Once the ZIP file is downloaded, extract it to a location of your choice. For example, you can create a new folder in your C drive named SQLite and extract the files there.
+Add SQLite to the PATH Environment Variable: To be able to access the sqlite3 command from any location in the Command Prompt, you need to add the path to the SQLite directory to the PATH environment variable. Here’s how you can do it:
+Press the Windows key + X and choose “System”.
+Click on “Advanced system settings”.
+Click on “Environment Variables”.
+Under “System variables”, find the “Path” variable, select it, and click on “Edit”.
+In the “Edit environment variable” window, click on “New”, and then add the path to the SQLite directory (e.g., C:\SQLite).
+Click “OK” in all windows to save the changes.
+Verify the Installation: Open a new Command Prompt and type sqlite3. If SQLite3 is installed correctly, you should see the SQLite command prompt.
+
+sqlite3 test.db "CREATE TABLE executions (id INTEGER PRIMARY KEY, timestamp VARCHAR, range_start INTEGER, range_end INTEGER, time_elapsed REAL, method TEXT, num_primes INTEGER);"
+
+uvicorn main:app --reload
+
+It will start your uvicorn server then after going to the url http://127.0.0.1:8000 you will be asked to add starting range and ending range along with a method name.
+After clicking on generate primes you will get the prime numbers on http://127.0.0.1:8000/primes and after going http://127.0.0.1:8000/executions we will get the data stored in database.

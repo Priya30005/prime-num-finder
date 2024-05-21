@@ -1,0 +1,30 @@
+python3 -m venv env
+
+source env/bin/activate
+
+pip install fastapi uvicorn python-multipart sqlalchemy async-exit-stack async-generator
+
+mkdir app
+cd app
+touch __init__.py
+touch main.py
+touch models.py
+touch database.py
+mkdir routers
+cd routers
+touch __init__.py
+touch primes.py
+cd ../..
+touch main.py
+
+sudo apt install sqlite3
+
+sqlite3 test.db "CREATE TABLE executions (id INTEGER PRIMARY KEY, timestamp VARCHAR, range_start INTEGER, range_end INTEGER, 
+time_elapsed REAL, method TEXT, num_primes INTEGER);"
+
+uvicorn main:app --reload
+
+http://127.0.0.1:8000/ here a UI is accessible which let's use input start and end of the range and select the method of their liking
+submitting will return a json formatted output of prime numbers and time elapsed.
+
+http://127.0.0.1:8000/executions here we can see our data stored in the databse table in a neatly written HTML table.
